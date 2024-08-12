@@ -11,6 +11,7 @@ import com.example.propertyplusapp.ui.theme.screens.details.DetailsScreen
 import com.example.propertyplusapp.ui.theme.screens.home.HomeScreen
 import com.example.propertyplusapp.ui.theme.screens.intent.IntentScreen
 import com.example.propertyplusapp.ui.theme.screens.property.PropertyScreen
+import com.example.propertyplusapp.ui.theme.screens.signup.SignupScreen
 import com.example.propertyplusapp.ui.theme.screens.splash.SplashScreen
 
 @Composable
@@ -43,6 +44,9 @@ fun AppNavHost(
         }
         composable(ROUT_INTENT) {
            IntentScreen(navController = navController)
+        }
+        composable(ROUT_SIGNUP) {
+            SignupScreen(navController = navController)
         }
     }
 }

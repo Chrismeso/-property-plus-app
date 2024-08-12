@@ -221,7 +221,7 @@ fun DetailsScreen(navController: NavController){
 
 
         Button(
-            onClick = { navController.navigate(ROUT_INTENT) },
+            onClick = { navController.navigate(ROUT_PROPERTY) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)

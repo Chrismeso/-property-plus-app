@@ -14,16 +14,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
@@ -70,7 +74,9 @@ import com.example.propertyplusapp.ui.theme.screens.property.bottomNavItems
 @Composable
 
 fun IntentScreen(navController: NavController){
-    Column (modifier = Modifier.fillMaxSize()){
+    Column (modifier = Modifier
+        .fillMaxSize()
+        .verticalScroll(rememberScrollState())){
         var selected by remember { mutableIntStateOf(0) }
         Scaffold(
             bottomBar = {
@@ -147,11 +153,16 @@ fun IntentScreen(navController: NavController){
                                 Image(
                                     painter = painterResource(id = R.drawable.homeimage),
                                     contentDescription ="home",
-                                    modifier = Modifier.fillMaxSize().padding(top = 10.dp).padding(start = 10.dp),
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(top = 10.dp)
+                                        .padding(start = 10.dp),
                                     contentScale = ContentScale.Crop
                                 )
                                 Icon(imageVector = Icons.Default.Favorite, contentDescription = "favourite",
-                                    modifier = Modifier.align(Alignment.TopStart).padding(10.dp))
+                                    modifier = Modifier
+                                        .align(Alignment.TopStart)
+                                        .padding(10.dp))
 
 
                             }
@@ -172,8 +183,12 @@ fun IntentScreen(navController: NavController){
                             }
                             Text(text = "THe best property you can find")
                             Text(text = "14,400 Reviews")
+                            val mContext = LocalContext.current
                             Button(
-                                onClick = { /*TODO*/ },
+                                onClick = {val callIntent= Intent(Intent.ACTION_DIAL)
+                                    callIntent.data="tel:0720245837".toUri()
+                                    mContext.startActivity(callIntent)
+                                          },
                                 colors = ButtonDefaults.buttonColors(lightblue),
                                 shape = RoundedCornerShape(10.dp)
                             ) {
@@ -181,8 +196,6 @@ fun IntentScreen(navController: NavController){
 
                             }
                         }
-
-                        
                     }
                     // End of row
                     Spacer(modifier = Modifier.height(10.dp))
@@ -297,19 +310,11 @@ fun IntentScreen(navController: NavController){
                         Text(text = "Camera")
 
                     }
-
-
-
                 }
-
             }
-
-
         )
 
-
     }
-
 }
 val bottomNavItems = listOf(
     BottomNavItem(
@@ -321,20 +326,18 @@ val bottomNavItems = listOf(
         badges=0
     ),
 
-
-
     BottomNavItem(
-        title = "Login",
-        route="login",
-        selectedIcon=Icons.Filled.Person,
-        unselectedIcon=Icons.Outlined.Person,
+        title = "Details",
+        route="details",
+        selectedIcon=Icons.Filled.Info,
+        unselectedIcon=Icons.Outlined.Info,
         hasNews = true,
         badges=5
     ),
 
     BottomNavItem(
-        title = "Signup",
-        route="signup",
+        title = "Property",
+        route="property",
         selectedIcon=Icons.Filled.Face,
         unselectedIcon=Icons.Outlined.Face,
         hasNews = true,
@@ -344,8 +347,6 @@ val bottomNavItems = listOf(
 
     )
 
-
-
 data class BottomNavItem(
     val title :String,
     val route :String,
@@ -354,12 +355,6 @@ data class BottomNavItem(
     val hasNews :Boolean,
     val badges :Int
 )
-
-
-
-
-
-
 
 @Composable
 @Preview(showBackground = true)
