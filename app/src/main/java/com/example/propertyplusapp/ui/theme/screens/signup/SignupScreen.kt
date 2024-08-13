@@ -28,10 +28,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,14 +43,19 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.propertyplusapp.R
 import com.example.propertyplusapp.navigation.ROUT_DETAIL
+import com.example.propertyplusapp.navigation.ROUT_LOGIN
+import com.example.propertyplusapp.navigation.ROUT_SIGNUP
 import com.example.propertyplusapp.ui.theme.lightblue
 
 
 @Composable
 
 fun SignupScreen(navController: NavController){
-    Column (modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally){
+    Column (modifier = Modifier
+        .fillMaxSize()
+        .paint(painterResource(id = R.drawable.background), contentScale = ContentScale.FillBounds),
+        horizontalAlignment = Alignment.CenterHorizontally
+        ){
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -76,7 +83,7 @@ fun SignupScreen(navController: NavController){
         OutlinedTextField(
             value = name,
             onValueChange ={ name = it},
-            label = { Text(text = "Fullname :")},
+            label = { Text(text = "Fullname :", fontWeight = FontWeight.Bold)},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp),
@@ -88,7 +95,7 @@ fun SignupScreen(navController: NavController){
         OutlinedTextField(
             value = email,
             onValueChange ={ email = it},
-            label = { Text(text = "Email Address :")},
+            label = { Text(text = "Email Address :", fontWeight = FontWeight.Bold)},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp),
@@ -100,7 +107,7 @@ fun SignupScreen(navController: NavController){
         OutlinedTextField(
             value = password,
             onValueChange ={ password = it},
-            label = { Text(text = "Password :")},
+            label = { Text(text = "Password :", fontWeight = FontWeight.Bold)},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp),
@@ -113,7 +120,7 @@ fun SignupScreen(navController: NavController){
         OutlinedTextField(
             value = confpassword,
             onValueChange ={ confpassword = it},
-            label = { Text(text = "Confirm password :")},
+            label = { Text(text = "Confirm password :", fontWeight = FontWeight.Bold)},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp),
@@ -123,7 +130,7 @@ fun SignupScreen(navController: NavController){
         )
         Spacer(modifier = Modifier.height(10.dp))
         Button(
-            onClick = { },
+            onClick = {navController.navigate(ROUT_LOGIN) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
@@ -131,8 +138,7 @@ fun SignupScreen(navController: NavController){
             colors = ButtonDefaults.buttonColors(lightblue),
             shape = RoundedCornerShape(10.dp)
         ) {
-            Text(text = "Create account")
-            
+            Text(text = "Login")
         }
         Spacer(modifier = Modifier.height(20.dp))
         Button(
