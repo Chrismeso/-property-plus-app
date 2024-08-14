@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -41,7 +42,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.propertyplusapp.R
+import com.example.propertyplusapp.data.AuthViewModel
+import com.example.propertyplusapp.navigation.ROUT_HOME
 import com.example.propertyplusapp.navigation.ROUT_SIGNUP
+import com.example.propertyplusapp.navigation.ROUT_SPLASH
 import com.example.propertyplusapp.ui.theme.lightblue
 
 @Composable
@@ -108,10 +112,12 @@ fun LoginScreen(navController: NavController){
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             visualTransformation = PasswordVisualTransformation()
         )
+        val context = LocalContext.current
+        val authViewModel = AuthViewModel(navController, context)
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
-            onClick = { },
+            onClick = { authViewModel.login(email, password) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)

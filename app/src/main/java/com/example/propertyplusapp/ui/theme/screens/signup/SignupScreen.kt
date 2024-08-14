@@ -31,6 +31,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -42,6 +43,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.propertyplusapp.R
+import com.example.propertyplusapp.data.AuthViewModel
 import com.example.propertyplusapp.navigation.ROUT_DETAIL
 import com.example.propertyplusapp.navigation.ROUT_LOGIN
 import com.example.propertyplusapp.navigation.ROUT_SIGNUP
@@ -128,21 +130,16 @@ fun SignupScreen(navController: NavController){
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             visualTransformation = PasswordVisualTransformation()
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        val context = LocalContext.current
+        val authViewModel = AuthViewModel(navController, context)
+
+
+
+
         Button(
-            onClick = {navController.navigate(ROUT_LOGIN) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-                .padding(start = 20.dp, end = 20.dp),
-            colors = ButtonDefaults.buttonColors(lightblue),
-            shape = RoundedCornerShape(10.dp)
-        ) {
-            Text(text = "Login")
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-        Button(
-            onClick = { },
+            onClick = {
+                authViewModel.signup(name, email, password,confpassword)
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
@@ -153,6 +150,23 @@ fun SignupScreen(navController: NavController){
             Text(text = "Sign up")
 
         }
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Button(
+            onClick = {
+                navController.navigate(ROUT_LOGIN)
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp)
+                .padding(start = 20.dp, end = 20.dp),
+            colors = ButtonDefaults.buttonColors(lightblue),
+            shape = RoundedCornerShape(10.dp)
+        ) {
+            Text(text = "Login")
+        }
+        Spacer(modifier = Modifier.height(20.dp))
+
 
 
 
