@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.propertyplusapp.models.User
+import com.example.propertyplusapp.navigation.ROUT_DASHBOARD
 import com.example.propertyplusapp.navigation.ROUT_HOME
 import com.example.propertyplusapp.navigation.ROUT_LOGIN
 import com.example.propertyplusapp.navigation.ROUT_SIGNUP
@@ -66,7 +67,7 @@ class AuthViewModel(var navController: NavController, var context: Context){
                 progress.dismiss()
                 if (it.isSuccessful){
                     Toast.makeText(this.context, "Success", Toast.LENGTH_SHORT).show()
-                    navController.navigate(ROUT_HOME)
+                    navController.navigate(ROUT_DASHBOARD)
                 }else{
                     Toast.makeText(this.context, "Error", Toast.LENGTH_SHORT).show()
                 }

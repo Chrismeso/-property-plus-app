@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.propertyplusapp.ui.theme.screens.about.AboutScreen
+import com.example.propertyplusapp.ui.theme.screens.dashboard.DashboardScreen
 import com.example.propertyplusapp.ui.theme.screens.details.DetailsScreen
 import com.example.propertyplusapp.ui.theme.screens.home.HomeScreen
 import com.example.propertyplusapp.ui.theme.screens.intent.IntentScreen
@@ -52,6 +53,10 @@ fun AppNavHost(
         composable(ROUT_LOGIN) {
            LoginScreen(navController = navController)
         }
+        composable(ROUT_DASHBOARD) {
+            DashboardScreen(navController = navController)
+        }
+
     }
 }
 
